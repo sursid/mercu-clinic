@@ -11,9 +11,9 @@ File utama yang sudah dibuat:
 📁 api/migrate.php       - Database migration helper
 
 🔧 BUILD SCRIPT ERROR FIXED:
-- Removed problematic vercel:publish-assets command
-- Simplified composer vercel-build script
-- Added error handling with || true
+- Removed copyFileSync for non-existent public/index.html ✅
+- Fixed package.json build script: "vite build" only
+- No more file copy errors during build
 
 🎯 UNTUK DEPLOY SEKARANG:
 
@@ -24,7 +24,7 @@ File utama yang sudah dibuat:
    vercel --prod
 
 📋 Yang akan terjadi otomatis:
-- Vercel akan menjalankan composer vercel-build ✅
+- Vite build akan berjalan tanpa error ✅
 - Setup environment variables via Vercel dashboard
 - Deploy ke Vercel serverless dengan PHP runtime
 - Configure routing untuk assets dan Laravel
@@ -40,4 +40,4 @@ APP_KEY, APP_ENV=production, APP_DEBUG=false
 
 📖 Dokumentasi lengkap: VERCEL_DEPLOYMENT.md
 
-Status: ✅ READY TO DEPLOY! (Build Script Fixed)
+Status: ✅ READY TO DEPLOY! (Package.json Fixed)

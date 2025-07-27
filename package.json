@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Clinic Management System",
   "main": "index.js",  "scripts": {
-    "build": "vite build && node -e \"const fs=require('fs'); fs.copyFileSync('public/index.html', 'dist/index.html'); fs.copyFileSync('public/_redirects', 'dist/_redirects'); fs.copyFileSync('public/favicon.ico', 'dist/favicon.ico');\"",
-    "build:netlify": "npm run build && echo 'Netlify build completed'",
+    "build": "vite build",
+    "build:netlify": "vite build",
     "dev": "vite",
     "netlify-dev": "netlify dev",
     "build:windows": "powershell -ExecutionPolicy Bypass -File build.ps1",
