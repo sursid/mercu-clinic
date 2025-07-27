@@ -1,7 +1,10 @@
 <?php
 
+require_once __DIR__ . '/../../vendor/autoload.php';
+
 namespace App\Providers;
 
+use Illuminate\Support\Facades\App as FacadeApp;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
 
@@ -12,8 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // Gunakan storage path /tmp/storage di production (Vercel) atau local (for serverless)
-        if (app()->environment(['production', 'local'])) {
+        if ($this->app->environment(['production', 'local'])) {
             $this->app->useStoragePath('/tmp/storage');
         }
     }
@@ -23,13 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Force HTTPS di production
-        if (app()->environment('production')) {
+        if ($this->app->environment('production')) {
             URL::forceScheme('https');
         }
-
-        // Pastikan direktori storage di /tmp tersedia di production atau local
-        if (app()->environment(['production', 'local'])) {
+        if ($this->app->environment(['production', 'local'])) {
             $tempDirs = [
                 '/tmp/storage/framework/cache',
                 '/tmp/storage/framework/sessions',
@@ -44,18 +43,17 @@ class AppServiceProvider extends ServiceProvider
                     @mkdir($dir, 0755, true);
                 }
             }
-            // Symlink /tmp/bootstrap/cache to bootstrap/cache if not exists
-            $bootstrapCache = base_path('bootstrap/cache');
-            $tmpBootstrapCache = '/tmp/bootstrap/cache';
-            // Pastikan bootstrap/cache selalu ada
-            if (!is_dir($bootstrapCache)) {
-                @mkdir($bootstrapCache, 0755, true);
+            if (!defined('LARAVEL_PACKAGE_MANIFEST_PATH')) {
+                define('LARAVEL_PACKAGE_MANIFEST_PATH', '/tmp/bootstrap/cache');
             }
+            if (!is_dir('/tmp/bootstrap/cache')) {
+                @mkdir('/tmp/bootstrap/cache', 0755, true);
+            }
+            $bootstrapCache = $this->app->basePath('bootstrap/cache');
+            $tmpBootstrapCache = '/tmp/bootstrap/cache';
             if (!is_link($bootstrapCache)) {
-                // Remove file or directory if it exists and is not a symlink
                 if (file_exists($bootstrapCache) && !is_link($bootstrapCache)) {
                     if (is_dir($bootstrapCache)) {
-                        // Remove all files in the directory
                         $files = glob($bootstrapCache . '/*');
                         foreach ($files as $file) {
                             if (is_file($file)) {
