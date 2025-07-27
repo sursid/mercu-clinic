@@ -17,4 +17,10 @@ build.sh
 vite.config.js
 phpunit.xml
 package.json.bak
+/package-lock.json
+/yarn.lock
+/tsconfig.json
+/webpack.config.js
+/webpack.mix.js
+package.json.bak
 *.bak
