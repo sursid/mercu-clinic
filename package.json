@@ -1,0 +1,22 @@
+{
+  "name": "mercubuana-clinic",
+  "version": "1.0.0",
+  "description": "Clinic Management System",
+  "main": "index.js",  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "netlify-dev": "netlify dev",
+    "build:windows": "powershell -ExecutionPolicy Bypass -File build.ps1",
+    "build:unix": "chmod +x build.sh && ./build.sh"
+  },
+  "dependencies": {
+    "@netlify/functions": "^2.0.0",
+    "php-wasm": "^0.0.9"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "laravel-vite-plugin": "^1.0.5",
+    "vite": "^6.0.0"
+  },
+  "type": "module"
+}
