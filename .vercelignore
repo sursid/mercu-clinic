@@ -12,3 +12,6 @@ storage/framework/sessions/
 storage/framework/views/
 storage/app/public/
 bootstrap/cache/
+build.sh
+vite.config.js
+phpunit.xml
