@@ -4,6 +4,7 @@
   "description": "Clinic Management System",
   "main": "index.js",  "scripts": {
     "build": "vite build",
+    "build:netlify": "npm run build && echo 'Netlify build completed'",
     "dev": "vite",
     "netlify-dev": "netlify dev",
     "build:windows": "powershell -ExecutionPolicy Bypass -File build.ps1",

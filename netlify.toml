@@ -6,6 +6,7 @@
 [build.environment]
   NODE_VERSION = "18"
   PHP_VERSION = "8.2"
+  NPM_FLAGS = "--production=false"
 
 [[redirects]]
   from = "/api/*"

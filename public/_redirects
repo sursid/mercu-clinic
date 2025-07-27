@@ -1,0 +1,4 @@
+# Netlify redirects for Laravel SPA/API routes
+/api/*  /.netlify/functions/php-handler  200
+/admin/*  /.netlify/functions/php-handler  200
+/*  /.netlify/functions/php-handler  200
