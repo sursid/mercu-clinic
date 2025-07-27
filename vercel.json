@@ -4,13 +4,8 @@
     {
       "src": "api/index.php",
       "use": "vercel-php@0.6.0"
-    },
-    {
-      "src": "public/**",
-      "use": "@vercel/static"
     }
   ],
-  "buildCommand": "composer run vercel-build",
   "routes": [
     {
       "src": "/filament/(.*)",
@@ -68,12 +63,5 @@
     "SESSION_DRIVER": "cookie",
     "QUEUE_CONNECTION": "sync",
     "FILESYSTEM_DISK": "local"
-  },
-  "functions": {
-    "api/index.php": {
-      "runtime": "vercel-php@0.6.0",
-      "excludeFiles": "{tests/**,storage/framework/sessions/**,storage/framework/cache/**,storage/logs/**}",
-      "maxDuration": 10
-    }
   }
 }
