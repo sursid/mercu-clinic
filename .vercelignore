@@ -16,3 +16,5 @@ bootstrap/cache/*
 build.sh
 vite.config.js
 phpunit.xml
+package.json.bak
+*.bak
