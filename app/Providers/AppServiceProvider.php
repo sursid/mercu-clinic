@@ -47,8 +47,22 @@ class AppServiceProvider extends ServiceProvider
             // Symlink /tmp/bootstrap/cache to bootstrap/cache if not exists
             $bootstrapCache = base_path('bootstrap/cache');
             $tmpBootstrapCache = '/tmp/bootstrap/cache';
-            if (!is_link($bootstrapCache) && is_dir($bootstrapCache)) {
-                @rmdir($bootstrapCache);
+            if (!is_link($bootstrapCache)) {
+                // Remove file or directory if it exists and is not a symlink
+                if (file_exists($bootstrapCache) && !is_link($bootstrapCache)) {
+                    if (is_dir($bootstrapCache)) {
+                        // Remove all files in the directory
+                        $files = glob($bootstrapCache . '/*');
+                        foreach ($files as $file) {
+                            if (is_file($file)) {
+                                @unlink($file);
+                            }
+                        }
+                        @rmdir($bootstrapCache);
+                    } else {
+                        @unlink($bootstrapCache);
+                    }
+                }
                 @symlink($tmpBootstrapCache, $bootstrapCache);
             }
         }
