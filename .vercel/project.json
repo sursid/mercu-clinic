@@ -1,0 +1,6 @@
+{
+  "framework": null,
+  "devCommand": "php artisan serve",
+  "buildCommand": "npm run build && composer run vercel-build",
+  "outputDirectory": "public"
+}
