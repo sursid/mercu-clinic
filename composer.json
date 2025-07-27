@@ -58,7 +58,7 @@
             "@php artisan test"
         ],
         "vercel-build": [
-            "echo 'Laravel build for Vercel'"
+            "@php -r \"copy('.env.production', '.env');\""
         ]
     },
     "extra": {
