@@ -58,9 +58,10 @@
             "@php artisan test"
         ],
         "vercel-build": [
-            "@php -r \"copy('.env.production', '.env');\"",
-            "@php artisan vercel:publish-assets",
-            "composer install --no-dev --optimize-autoloader"
+            "@php -r \"file_exists('.env.production') && copy('.env.production', '.env');\"",
+            "@php artisan config:clear || true",
+            "@php artisan route:clear || true",
+            "@php artisan view:clear || true"
         ]
     },
     "extra": {
