@@ -1,6 +1,11 @@
 {
-  "framework": null,
+  "framework": "laravel",
   "devCommand": "php artisan serve",
   "buildCommand": "npm run build && composer run vercel-build",
-  "outputDirectory": "public"
+  "outputDirectory": "public",
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.6.0"
+    }
+  }
 }
