@@ -45,9 +45,6 @@
     "LOG_CHANNEL": "stderr",
     "BROADCAST_DRIVER": "log",
     "FILESYSTEM_DISK": "local",
-    "QUEUE_CONNECTION": "sync"
-  },
-  "framework": null,
-  "installCommand": "composer install --no-dev --optimize-autoloader",
-  "buildCommand": "echo 'PHP Laravel - no build needed'"
+    "QUEUE_CONNECTION": "sync"  },
+  "framework": null
 }
