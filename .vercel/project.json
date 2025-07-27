@@ -3,6 +3,7 @@
   "devCommand": "php artisan serve",
   "buildCommand": "npm run build && composer run vercel-build",
   "outputDirectory": "public",
+  "installCommand": "npm install && composer install --no-dev --optimize-autoloader",
   "functions": {
     "api/index.php": {
       "runtime": "vercel-php@0.6.0"
