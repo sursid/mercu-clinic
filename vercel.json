@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "php/index.php",
+      "use": "@vercel/php"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/public/assets/$1"
+    },
+    {
+      "src": "/css/(.*)",
+      "dest": "/public/css/$1"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "/public/js/$1"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/public/favicon.ico"
+    },
+    {
+      "src": "/robots.txt",
+      "dest": "/public/robots.txt"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/php/index.php"
+    }
+  ],
+  "env": {
+    "APP_NAME": "Clinic Mercubuana",
+    "APP_ENV": "production",
+    "APP_DEBUG": "false",
+    "APP_KEY": "base64:JjVNXKQcSwno0cSNUuNtCksWZzhc4zOY4w2YYTqC+LY=",
+    "APP_URL": "https://mercu-clinic.vercel.app",
+    "DB_CONNECTION": "mysql",
+    "DB_HOST": "",
+    "DB_PORT": "3306",
+    "DB_DATABASE": "",
+    "DB_USERNAME": "",
+    "DB_PASSWORD": "",
+    "CACHE_DRIVER": "array",
+    "SESSION_DRIVER": "cookie",
+    "LOG_CHANNEL": "stderr",
+    "BROADCAST_DRIVER": "log",
+    "FILESYSTEM_DISK": "local",
+    "QUEUE_CONNECTION": "sync"
+  }
+}
