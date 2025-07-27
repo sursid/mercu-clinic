@@ -12,8 +12,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // Gunakan storage path /tmp/storage hanya di production (Vercel)
-        if (app()->environment('production')) {
+        // Gunakan storage path /tmp/storage di production (Vercel) atau local (for serverless)
+        if (app()->environment(['production', 'local'])) {
             $this->app->useStoragePath('/tmp/storage');
         }
     }
@@ -28,13 +28,15 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        // Pastikan direktori storage di /tmp tersedia di production
-        if (app()->environment('production')) {
+        // Pastikan direktori storage di /tmp tersedia di production atau local
+        if (app()->environment(['production', 'local'])) {
             $tempDirs = [
                 '/tmp/storage/framework/cache',
                 '/tmp/storage/framework/sessions',
                 '/tmp/storage/framework/views',
                 '/tmp/storage/logs',
+                '/tmp/storage/app',
+                '/tmp/storage/framework',
             ];
             foreach ($tempDirs as $dir) {
                 if (!is_dir($dir)) {
