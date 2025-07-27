@@ -37,11 +37,19 @@ class AppServiceProvider extends ServiceProvider
                 '/tmp/storage/logs',
                 '/tmp/storage/app',
                 '/tmp/storage/framework',
+                '/tmp/bootstrap/cache',
             ];
             foreach ($tempDirs as $dir) {
                 if (!is_dir($dir)) {
                     @mkdir($dir, 0755, true);
                 }
+            }
+            // Symlink /tmp/bootstrap/cache to bootstrap/cache if not exists
+            $bootstrapCache = base_path('bootstrap/cache');
+            $tmpBootstrapCache = '/tmp/bootstrap/cache';
+            if (!is_link($bootstrapCache) && is_dir($bootstrapCache)) {
+                @rmdir($bootstrapCache);
+                @symlink($tmpBootstrapCache, $bootstrapCache);
             }
         }
     }
