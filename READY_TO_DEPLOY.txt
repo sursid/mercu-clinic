@@ -1,21 +1,28 @@
 🚀 LARAVEL VERCEL DEPLOYMENT - READY!
 ==========================================
 
-✅ KONFIGURASI SELESAI!
+✅ KONFIGURASI SELESAI! (Runtime Error FIXED)
 
 File utama yang sudah dibuat:
-📁 vercel.json           - Konfigurasi Vercel (FIXED)
+📁 vercel.json           - Konfigurasi Vercel (FIXED: @vercel/php@0.6.0)
 📁 api/index.php         - Laravel serverless entry point  
 📁 .env.production       - Environment template
 📁 deploy-fixed.ps1      - Script deployment PowerShell
 📁 api/migrate.php       - Database migration helper
 
+🔧 RUNTIME ERROR FIXED:
+- Changed: vercel-php@0.6.0 ❌
+- To: @vercel/php@0.6.0 ✅
+
 🎯 UNTUK DEPLOY SEKARANG:
 
-1. Jalankan command ini:
+1. Install Vercel CLI:
+   npm install -g vercel
+
+2. Jalankan deployment:
    .\deploy-fixed.ps1
 
-2. Atau manual:
+3. Atau manual:
    vercel --prod
 
 📋 Yang akan terjadi otomatis:
@@ -32,4 +39,4 @@ File utama yang sudah dibuat:
 
 📖 Dokumentasi lengkap: VERCEL_DEPLOYMENT.md
 
-Status: ✅ READY TO DEPLOY!
+Status: ✅ READY TO DEPLOY! (Runtime Fixed)
