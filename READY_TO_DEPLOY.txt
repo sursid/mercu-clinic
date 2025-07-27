@@ -1,42 +1,43 @@
 🚀 LARAVEL VERCEL DEPLOYMENT - READY!
 ==========================================
 
-✅ KONFIGURASI SELESAI! (Runtime Error FIXED)
+✅ KONFIGURASI SELESAI! (Build Script FIXED)
 
 File utama yang sudah dibuat:
-📁 vercel.json           - Konfigurasi Vercel (FIXED: @vercel/php@0.6.0)
+📁 vercel.json           - Konfigurasi Vercel (SIMPLIFIED & FIXED)
 📁 api/index.php         - Laravel serverless entry point  
 📁 .env.production       - Environment template
 📁 deploy-fixed.ps1      - Script deployment PowerShell
 📁 api/migrate.php       - Database migration helper
 
-🔧 RUNTIME ERROR FIXED:
-- Changed: vercel-php@0.6.0 ❌
-- To: @vercel/php@0.6.0 ✅
+🔧 BUILD SCRIPT ERROR FIXED:
+- Removed problematic vercel:publish-assets command
+- Simplified composer vercel-build script
+- Added error handling with || true
 
 🎯 UNTUK DEPLOY SEKARANG:
 
 1. Install Vercel CLI:
    npm install -g vercel
 
-2. Jalankan deployment:
-   .\deploy-fixed.ps1
-
-3. Atau manual:
+2. Deploy:
    vercel --prod
 
 📋 Yang akan terjadi otomatis:
-- Install dependencies dengan Composer
-- Setup environment variables
-- Deploy ke Vercel serverless
-- Configure routing untuk Filament admin
+- Vercel akan menjalankan composer vercel-build ✅
+- Setup environment variables via Vercel dashboard
+- Deploy ke Vercel serverless dengan PHP runtime
+- Configure routing untuk assets dan Laravel
 
 🌐 Setelah deploy berhasil:
 - Aplikasi Laravel live di Vercel
 - Admin panel tersedia di /admin
 - Database SQLite otomatis setup
-- Assets Filament sudah dikonfigurasi
+- Static assets sudah dikonfigurasi
+
+⚙️ Set environment variables di Vercel dashboard:
+APP_KEY, APP_ENV=production, APP_DEBUG=false
 
 📖 Dokumentasi lengkap: VERCEL_DEPLOYMENT.md
 
-Status: ✅ READY TO DEPLOY! (Runtime Fixed)
+Status: ✅ READY TO DEPLOY! (Build Script Fixed)

@@ -56,12 +56,6 @@
         "test": [
             "@php artisan config:clear --ansi",
             "@php artisan test"
-        ],
-        "vercel-build": [
-            "@php -r \"file_exists('.env.production') && copy('.env.production', '.env');\"",
-            "@php artisan config:clear || true",
-            "@php artisan route:clear || true",
-            "@php artisan view:clear || true"
         ]
     },
     "extra": {
