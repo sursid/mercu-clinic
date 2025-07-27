@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Clinic Management System",
   "main": "index.js",  "scripts": {
-    "build": "vite build",
+    "build": "vite build && node -e \"const fs=require('fs'); fs.copyFileSync('public/index.html', 'dist/index.html'); fs.copyFileSync('public/_redirects', 'dist/_redirects'); fs.copyFileSync('public/favicon.ico', 'dist/favicon.ico');\"",
     "build:netlify": "npm run build && echo 'Netlify build completed'",
     "dev": "vite",
     "netlify-dev": "netlify dev",
@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@netlify/functions": "^2.0.0",
-    "php-wasm": "^0.0.9"
+    "axios": "^1.11.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.0",

@@ -1,54 +1,74 @@
-import { PhpWeb } from 'php-wasm';
-
-let phpWeb;
-
+// Netlify function to handle Laravel API routes
 export async function handler(event, context) {
+    const { httpMethod, path, headers, body, queryStringParameters } = event;
+    
     try {
-        // Initialize PHP WebAssembly if not already done
-        if (!phpWeb) {
-            phpWeb = new PhpWeb({
-                docroot: '/public',
-                scriptPath: '/public/index.php',
-                env: {
-                    APP_ENV: 'production',
-                    APP_DEBUG: 'false',
-                    APP_KEY: process.env.APP_KEY || 'base64:' + Buffer.from('your-app-key-here').toString('base64'),
-                    DB_CONNECTION: 'sqlite',
-                    DB_DATABASE: '/database/database.sqlite'
-                }
-            });
-            
-            // Copy Laravel files to PHP WebAssembly filesystem
-            await copyLaravelFiles(phpWeb);
+        // For now, return a simple response
+        // In production, you would typically use a different approach
+        // such as deploying to a PHP hosting service and using this as a proxy
+        
+        if (path.startsWith('/api/')) {
+            return {
+                statusCode: 200,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+                },
+                body: JSON.stringify({
+                    message: 'Laravel API endpoint',
+                    method: httpMethod,
+                    path: path,
+                    note: 'This is a placeholder. Consider deploying your Laravel backend to a PHP hosting service.'
+                })
+            };
         }
-
-        // Handle the request
-        const response = await phpWeb.request({
-            method: event.httpMethod,
-            url: event.path,
-            headers: event.headers,
-            body: event.body,
-            query: event.queryStringParameters || {}
-        });
-
+        
+        // For non-API routes, serve the frontend
         return {
-            statusCode: response.status,
-            headers: response.headers,
-            body: response.body,
-            isBase64Encoded: response.isBase64Encoded || false
+            statusCode: 200,
+            headers: {
+                'Content-Type': 'text/html',
+            },
+            body: `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercubuana Clinic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="max-w-md w-full bg-white rounded-lg shadow-md p-6">
+            <h1 class="text-2xl font-bold text-center text-gray-900 mb-4">Mercubuana Clinic</h1>
+            <p class="text-gray-600 text-center mb-4">
+                Your Laravel application is being served through Netlify Functions.
+            </p>
+            <div class="text-center">
+                <a href="/admin" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Go to Admin Panel
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+            `
         };
+        
     } catch (error) {
-        console.error('PHP Handler Error:', error);
+        console.error('Handler Error:', error);
         return {
             statusCode: 500,
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ error: 'Internal Server Error', message: error.message })
+            body: JSON.stringify({ 
+                error: 'Internal Server Error', 
+                message: error.message,
+                note: 'Consider deploying your Laravel backend separately'
+            })
         };
     }
-}
-
-async function copyLaravelFiles(phpWeb) {
-    // This would copy your Laravel application files to the PHP WebAssembly filesystem
-    // Implementation depends on your specific needs and file structure
-    console.log('Copying Laravel files to PHP WebAssembly filesystem...');
 }
